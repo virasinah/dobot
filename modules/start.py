@@ -31,10 +31,10 @@ def start(d: Message):
             callback_data='manage_droplets'
         ),
     )
-    t = f'Selamat Datang <b>{bot_name}</b> 👋\n\n' \
+    t = f'𝘚𝘦𝘭𝘢𝘮𝘢𝘵 𝘋𝘢𝘵𝘢𝘯𝘨 <b>{bot_name}</b> 👋\n\n' \
         'Anda dapat mengelola akun DigitalOcean, membuat instance, dll.\n\n' \
         'Perintah cepat:\n' \
-        '/start - Memulai bot\n' \
+        '/start - 𝙼𝚎𝚖𝚞𝚕𝚊𝚒 𝚋𝚘𝚝\n' \
         '/add_do - Tambah akun\n' \
         '/sett_do - Kelola akun\n' \
         '/bath_do - Uji batch akun\n' \
