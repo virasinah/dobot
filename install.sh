@@ -1,27 +1,28 @@
 #!/bin/bash
 # Installer 1 klik Telegram Bot Dobot + systemd service
 
-# 1. Update & install paket dasar
+# Update & install paket dasar
 apt update && apt upgrade -y
 apt install -y python3 python3-pip git
 
-# 2. Clone atau update repo Dobot
-cd /root
-if [ -d "dobot" ]; then
+# Tentukan folder instalasi
+BOT_DIR="/root/dobot"
+
+# Clone atau update repo Dobot
+if [ -d "$BOT_DIR" ]; then
     echo "Folder dobot sudah ada, melakukan update..."
-    cd dobot
+    cd "$BOT_DIR"
     git pull origin main
 else
-    git clone https://github.com/virasinah/dobot.git
-    cd dobot
+    git clone https://github.com/virasinah/dobot.git "$BOT_DIR"
 fi
 
-# 3. Install requirements jika ada
-if [ -f "requirements.txt" ]; then
-    pip3 install -r requirements.txt
+# Install requirements jika ada
+if [ -f "$BOT_DIR/requirements.txt" ]; then
+    pip3 install -r "$BOT_DIR/requirements.txt"
 fi
 
-# 4. Buat file systemd service
+# Buat file systemd service
 cat > /etc/systemd/system/dobot.service << 'EOF'
 [Unit]
 Description=Telegram Bot Dobot
@@ -38,11 +39,10 @@ User=root
 WantedBy=multi-user.target
 EOF
 
-# 5. Reload systemd & jalankan service
+# Reload systemd & jalankan service
 systemctl daemon-reload
 systemctl enable dobot
 systemctl restart dobot
 
 echo "✅ Bot Dobot berhasil diinstal dan dijalankan sebagai service!"
-echo "Cek status dengan: systemctl status dobot"
-
+echo "Cek status: systemctl status dobot"
