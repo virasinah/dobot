@@ -1,0 +1,13 @@
+[Unit]
+Description=Telegram Bot Dobot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/dobot
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
